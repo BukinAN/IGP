@@ -5,5 +5,6 @@
     <session-factory>
         <mapping class = "com.springapp.mvc.domain.Product"></mapping>
         <mapping class = "com.springapp.mvc.domain.Category"></mapping>
+        <mapping class = "com.springapp.mvc.domain.Search"></mapping>
     </session-factory>
 </hibernate-configuration>

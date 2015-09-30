@@ -9,7 +9,7 @@ public class Product {
     @Id
     @Column(name="id")
     @GeneratedValue
-    private int iD;
+    private int id;
 
     @Column(name="name")
     private String name;
@@ -21,15 +21,15 @@ public class Product {
     private int cat_id;
 
     @ManyToOne
-    @JoinColumn(name="cat_id")
+    @JoinColumn(name = "cat_id", insertable = false, updatable = false)
     private Category category;
 
     public int getiD() {
-        return iD;
+        return id;
     }
 
     public void setiD(int iD) {
-        this.iD = iD;
+        this.id = iD;
     }
 
     public int getCat_id() {
@@ -41,11 +41,11 @@ public class Product {
     }
 
     public int getId() {
-        return iD;
+        return id;
     }
 
     public void setId(int iD) {
-        this.iD = iD;
+        this.id = iD;
     }
 
     public float getPrice() {
@@ -74,6 +74,6 @@ public class Product {
 
     @Override
     public String toString(){
-        return String.valueOf(iD)+"  "+name+"  "+String.valueOf(price);
+        return String.valueOf(id)+"  "+name+"  "+String.valueOf(price);
     }
 }

@@ -26,40 +26,21 @@ public class PriceListController extends HttpServlet {
 
     private PriceListRepository pricelistrepository;
 
-    //Search search = new Search();
-
     @Autowired
     public PriceListController(PriceListRepository pricelistrepository){
         this.pricelistrepository = pricelistrepository;
     }
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getProducts(Model model){
         List<Product> products = this.pricelistrepository.listAll();
         model.addAttribute("products", products);
         return "index";
     }
-    /*
-    @RequestMapping(value = "/search.form", method = RequestMethod.GET)
-    public String selectProduct(@ModelAttribute("category") String category,
-                                @ModelAttribute("name") String name,
-                                @ModelAttribute("priceFrom") String priceFrom,
-                                @ModelAttribute("priceTo") String priceTo,
-                                Model model){
-        List<Product> products = this.pricelistrepository.loadSearch(category, name, priceFrom, priceTo);
-        model.addAttribute("products", products);
-        return "index";
-    }
-    */
+
     @RequestMapping(value = "/search.form", method = RequestMethod.GET)
     public String selectProduct(@ModelAttribute Search search, Model model){
 
-        /*String string = null;
-        try {
-            string = new String(search.getName().getBytes("cp1251"), "UTF-8");
-            //string.getBytes("Windows-1251");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }*/
         List<Product> products = this.pricelistrepository.loadSearch(search.getCategory(),
                 search.getName(), search.getPriceFrom(), search.getPriceTo());
         model.addAttribute("products", products);

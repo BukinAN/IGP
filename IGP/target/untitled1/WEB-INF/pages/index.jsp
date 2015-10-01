@@ -6,6 +6,7 @@
 <html>
 <head>
   <title>IGP</title>
+  <link href="<c:url value="/resources/css/main.css"/>" rel="stylesheet">
 </head>
 <body>
 <h1>Прайс-лист</h1>
@@ -32,26 +33,20 @@
         <td><label>
           <input type="text" name="priceTo"/>
         </label></td>
-        <td colspan="2"><input type="submit" value="Поиск"/></td>
+        <td colspan="2"><input type="submit" value="Найти"/></td>
       </tr>
     </table>
   </form>
 </div>
 
-<div>
-  <form method="get" action="test.form">
-    <input type="text" name="testtext"/>
-    <input type="submit" value="Enter"/>
-  </form>
-</div>
 
-<div>
+<div class="tableSearch">
   <c:if test = "${!empty products}">
-    <table>
+    <table border="1" cellspacing="0" cellpadding="0" width="520px">
       <tr>
-        <th>Категория</th>
-        <th>Наименование</th>
-        <th>Цена</th>
+        <th width="173px" align="left" height="30px" bgcolor="#E1E3E3">Категория</th>
+        <th width="173px" align="left" height="30px" bgcolor="#E1E3E3">Наименование</th>
+        <th width="173px" align="left" height="30px" bgcolor="#E1E3E3">Цена</th>
       </tr>
       <c:forEach items = "${products}" var = "product">
         <tr>

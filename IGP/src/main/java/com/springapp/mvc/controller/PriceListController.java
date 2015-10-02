@@ -12,18 +12,31 @@ import javax.servlet.http.HttpServlet;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
-
+/**
+ * Обработчик событий на страницах index.jsp и indexError.jsp
+ */
 @Controller
 public class PriceListController extends HttpServlet {
 
+    /**
+     * переменная для работы  с репозиторием
+     */
     private PriceListRepository pricelistrepository;
 
-
+    /**
+     * конструктор с автозаполнением (от Spring)
+     * @param pricelistrepository репозиторий
+     */
     @Autowired
     public PriceListController(PriceListRepository pricelistrepository){
         this.pricelistrepository = pricelistrepository;
     }
 
+    /**
+     * стартовая страница index.jsp, формирует начальный вывод всего содержимого таблицы prod
+     * @param model составной элемент MVC
+     * @return направляет на index.jsp
+     */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getProducts(Model model){
         List<Product> products = this.pricelistrepository.listAll();
@@ -31,115 +44,29 @@ public class PriceListController extends HttpServlet {
         return "index";
     }
 
+    /**
+     * обработчик событий поиска
+     * @param search сущность, элементы которой заполняются параметрами поиска
+     * @param model составной элемент MVC
+     * @return возвращает либо на index.jsp, либо на indexError.jsp
+     */
     @RequestMapping(value = "/search.form", method = RequestMethod.GET)
     public String selectProduct(@ModelAttribute Search search, Model model){
-        String newString = null;
-        try {
-            newString = new String(search.getName().getBytes("UTF-8"), "Cp1251");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
 
+        //проверка на пустоту всех 4 полей-критериев поска
         if(search.getCategory().isEmpty()==true
                 && search.getName().isEmpty()==true
                 && search.getPriceFrom().isEmpty()==true
                 && search.getPriceTo().isEmpty()==true){
+            //если все 4 поля пустые перенапрвит на indexError.jsp
             return "indexError";
         }
-
+        //иначе отправит данные в репозиторий для формирования HQL запроса и получения параметров из БД
         List<Product> products = this.pricelistrepository.loadSearch(search.getCategory(),
-                newString, search.getPriceFrom(), search.getPriceTo());
+                search.getName(), search.getPriceFrom(), search.getPriceTo());
         model.addAttribute("products", products);
+        //направит на idex.jsp с отобранными из БД параметрами
         return "index";
     }
-
-
-
-
-
-
-
-
-
-
-
-
-    /*@RequestMapping(value = "/test.form", method = RequestMethod.GET)
-    public String selectProduct(@ModelAttribute("search") Search search, Model model){
-        List<Product> products = this.pricelistrepository.loadSearch(search.getCategory(),
-                search.getName(), search.getPriceFrom(), search.getPriceTo());
-        model.addAttribute("products", products);
-        return "index";
-    }*/
-    //?useUnicode=true&characterEncoding=UTF-8&characterSetResults=UTF-8
-    /*
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String category = "";
-        String name = "";
-        String priceFrom = "";
-        String priceTo = "";
-        try {
-
-            category = request.getParameter("category");
-            search.setCategory(category);
-            name = request.getParameter("name");
-            search.setName(name);
-            priceFrom = request.getParameter("priceFrom");
-            search.setPriceFrom(priceFrom);
-            priceTo = request.getParameter("priceTo");
-            search.setPriceTo(priceTo);
-        } catch(Exception e){
-            e.printStackTrace();
-        }
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/pages/index.jsp");
-        dispatcher.forward(request, response);
-
-    }*/
-    /*@RequestMapping(value = "/search.form", method = RequestMethod.GET)
-    public String selectProduct(Model model){
-        List<Product> products = this.pricelistrepository.loadSearch(search.getCategory(),
-                search.getName(), search.getPriceFrom(), search.getPriceTo());
-        model.addAttribute("products", products);
-        return "index";
-    }*/
-
-    /*<div>
-  <form:form method="post" action="test.form" commandName="search" >
-    <table>
-      <tr>
-      <td><form:label path="category">
-        category
-      </form:label></td>
-      <td><form:input path="category"/></td>
-    </tr>
-      <tr>
-        <td><form:label path="name">
-          category
-        </form:label>
-        </td>
-        <td>
-          <form:input path="name"/> </td>
-      </tr>
-      <tr>
-        <td><form:label path="priceFrom">
-          priceFrom
-        </form:label></td>
-        <td><form:input path="priceFrom"/></td>
-      </tr>
-      <tr>
-        <td><form:label path="priceTo">
-          priceTo
-        </form:label>
-        </td>
-        <td>
-          <form:input path="priceTo"/> </td>
-      </tr>
-      <tr>
-        <td colspan="2"><input type="submit" value="search"/></td>
-      </tr>
-    </table>
-  </form:form>
-</div>*/
-
 
 }

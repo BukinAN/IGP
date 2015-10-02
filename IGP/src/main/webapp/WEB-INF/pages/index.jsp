@@ -1,8 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
   <title>IGP</title>
@@ -42,8 +39,8 @@
 <div class="tableSearch">
   <table border="1" cellspacing="0" cellpadding="5px" width="520px">
     <tr>
-      <th width="173px" align="left" height="30px" bgcolor="#E1E3E3">Категория</th>
-      <th width="173px" align="left" height="30px" bgcolor="#E1E3E3">Наименование</th>
+      <th width="165px" align="left" height="30px" bgcolor="#E1E3E3">Категория</th>
+      <th width="165px" align="left" height="30px" bgcolor="#E1E3E3">Наименование</th>
       <th align="left" height="30px" bgcolor="#E1E3E3">Цена</th>
     </tr>
   </table>
@@ -51,8 +48,8 @@
    <table border="1" cellspacing="0" cellpadding="5px" width="520px">
       <c:forEach items = "${products}" var = "product">
         <tr>
-          <td width="173px">${product.category.name}</td>
-          <td width="173px">${product.name}</td>
+          <td width="165px">${product.category.name}</td>
+          <td width="165px">${product.name}</td>
           <td>${product.price}</td>
         </tr>
       </c:forEach>

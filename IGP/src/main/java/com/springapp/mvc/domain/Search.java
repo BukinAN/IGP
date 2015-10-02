@@ -1,13 +1,26 @@
 package com.springapp.mvc.domain;
 
-import javax.persistence.Entity;
 
-
+/**
+ * класс для реализации поискового запроса
+ */
 public class Search {
 
+    /**
+     * категория
+     */
     private String category;
+    /**
+     * наименование
+     */
     private String name;
+    /**
+     * стоимость от
+     */
     private String priceFrom;
+    /**
+     * стоимость до
+     */
     private String priceTo;
 
     public String getPriceFrom() {

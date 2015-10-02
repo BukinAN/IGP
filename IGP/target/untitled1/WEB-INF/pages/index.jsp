@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <html>
 <head>
   <title>IGP</title>
@@ -8,7 +9,7 @@
 <h1>Прайс-лист</h1>
 
 <div>
-  <form method="get" action="search.form" >
+  <form method="post" action="search.form" >
     <table>
       <tr>
         <td>Категория:</td>

@@ -8,15 +8,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import javax.servlet.http.HttpServlet;
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 /**
  * Обработчик событий на страницах index.jsp и indexError.jsp
  */
 @Controller
-public class PriceListController extends HttpServlet {
+public class PriceListController {
 
     /**
      * переменная для работы  с репозиторием
@@ -50,7 +48,7 @@ public class PriceListController extends HttpServlet {
      * @param model составной элемент MVC
      * @return возвращает либо на index.jsp, либо на indexError.jsp
      */
-    @RequestMapping(value = "/search.form", method = RequestMethod.GET)
+    @RequestMapping(value = "/search.form", method = RequestMethod.POST)
     public String selectProduct(@ModelAttribute Search search, Model model){
 
         //проверка на пустоту всех 4 полей-критериев поска

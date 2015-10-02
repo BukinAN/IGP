@@ -7,7 +7,7 @@
 <h1>Прайс-лист</h1>
 
 <div>
-  <form method="get" action="search.form" >
+  <form method="post" action="search.form" >
     <table>
       <tr>
         <td>Категория:</td>

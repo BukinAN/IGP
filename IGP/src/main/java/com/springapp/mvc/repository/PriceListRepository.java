@@ -33,14 +33,14 @@ public class PriceListRepository {
                 && priceTo.isEmpty()==true){
             //если задана только категория
             return this.sessionFactory.getCurrentSession().createQuery("FROM Product AS p INNER JOIN FETCH " +
-                    "p.category AS pc WHERE pc.name LIKE '%"+category+"%'").list();
+                    "p.category AS pc WHERE pc.name LIKE '%" + category + "%'").list();
         } else if(category.isEmpty()==true
                 && name.isEmpty()==false
                 && priceFrom.isEmpty()==true
                 && priceTo.isEmpty()==true){
             //если задано только наименование
             return this.sessionFactory.getCurrentSession().createQuery("FROM Product AS p INNER JOIN FETCH " +
-                    "p.category AS pc WHERE p.name LIKE '%"+name+"%'").list();
+                    "p.category AS pc WHERE p.name LIKE '%" + name + "%'").list();
         } else if(category.isEmpty()==true
                 && name.isEmpty()==true
                 && priceFrom.isEmpty()==false
@@ -144,7 +144,7 @@ public class PriceListRepository {
         }
          else {
             //заглушка
-            return this.sessionFactory.getCurrentSession().createQuery("FROM Product AS p INNER JOIN FETCH p.category").list();
+            return this.sessionFactory.getCurrentSession().createQuery("FROM Product AS p INNER JOIN FETCH p.category AS pc WHERE pc.name LIKE '%Процессор%'").list();
         }
     }
 

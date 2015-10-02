@@ -32,6 +32,8 @@ public class PriceListRepository {
 
 
 
+
+
         if(category.isEmpty()==false
                 && name.isEmpty()==true
                 && priceFrom.isEmpty()==true
@@ -144,7 +146,8 @@ public class PriceListRepository {
 
 
          else {
-            return this.sessionFactory.getCurrentSession().createQuery("FROM Product AS p INNER JOIN FETCH p.category").list();
+
+            return this.sessionFactory.getCurrentSession().createQuery("FROM Product AS p INNER JOIN FETCH p.category AS pc WHERE pc.name LIKE '%п%'").list();
         }
     }
 

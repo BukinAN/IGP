@@ -24,13 +24,6 @@ public class Product {
     @JoinColumn(name = "cat_id", insertable = false, updatable = false)
     private Category category;
 
-    public int getiD() {
-        return id;
-    }
-
-    public void setiD(int iD) {
-        this.id = iD;
-    }
 
     public int getCat_id() {
         return cat_id;
@@ -44,8 +37,8 @@ public class Product {
         return id;
     }
 
-    public void setId(int iD) {
-        this.id = iD;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public float getPrice() {

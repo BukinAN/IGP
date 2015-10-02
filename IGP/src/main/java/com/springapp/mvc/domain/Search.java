@@ -1,5 +1,7 @@
 package com.springapp.mvc.domain;
 
+import javax.persistence.Entity;
+
 
 public class Search {
 

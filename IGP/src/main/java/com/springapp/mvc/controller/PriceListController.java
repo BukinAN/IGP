@@ -3,28 +3,21 @@ package com.springapp.mvc.controller;
 import com.springapp.mvc.domain.*;
 import com.springapp.mvc.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import javax.annotation.Resource;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+
 
 @Controller
 public class PriceListController extends HttpServlet {
 
     private PriceListRepository pricelistrepository;
+
 
     @Autowired
     public PriceListController(PriceListRepository pricelistrepository){
@@ -40,12 +33,37 @@ public class PriceListController extends HttpServlet {
 
     @RequestMapping(value = "/search.form", method = RequestMethod.GET)
     public String selectProduct(@ModelAttribute Search search, Model model){
+        String newString = null;
+        try {
+            newString = new String(search.getName().getBytes("UTF-8"), "Cp1251");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        if(search.getCategory().isEmpty()==true
+                && search.getName().isEmpty()==true
+                && search.getPriceFrom().isEmpty()==true
+                && search.getPriceTo().isEmpty()==true){
+            return "indexError";
+        }
 
         List<Product> products = this.pricelistrepository.loadSearch(search.getCategory(),
-                search.getName(), search.getPriceFrom(), search.getPriceTo());
+                newString, search.getPriceFrom(), search.getPriceTo());
         model.addAttribute("products", products);
         return "index";
     }
+
+
+
+
+
+
+
+
+
+
+
+
     /*@RequestMapping(value = "/test.form", method = RequestMethod.GET)
     public String selectProduct(@ModelAttribute("search") Search search, Model model){
         List<Product> products = this.pricelistrepository.loadSearch(search.getCategory(),

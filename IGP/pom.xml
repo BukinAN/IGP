@@ -124,15 +124,8 @@
             <version>3.2.5.RELEASE</version>
         </dependency>
 
-        <dependency>
-            <groupId>commons-validator</groupId>
-            <artifactId>commons-validator</artifactId>
-            <version>1.4.0</version>
-        </dependency>
-    </dependencies>
-
     <build>
-        <finalName>untitled1</finalName>
+        <finalName>IGP</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
